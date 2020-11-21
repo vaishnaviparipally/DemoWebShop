@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="61318" started-at="2020-11-21T09:08:37 EST" finished-at="2020-11-21T09:09:39 EST">
+  <suite name="Default suite" duration-ms="44822" started-at="2020-11-21T09:56:37 EST" finished-at="2020-11-21T09:57:22 EST">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="61318" started-at="2020-11-21T09:08:37 EST" finished-at="2020-11-21T09:09:39 EST">
+    <test name="Default test" duration-ms="44822" started-at="2020-11-21T09:56:37 EST" finished-at="2020-11-21T09:57:22 EST">
       <class name="com.testing.demo.EcommerceOrder">
-        <test-method status="PASS" signature="login()[pri:0, instance:com.testing.demo.EcommerceOrder@54422e18]" name="login" is-config="true" duration-ms="16743" started-at="2020-11-21T09:08:37 EST" finished-at="2020-11-21T09:08:54 EST">
+        <test-method status="PASS" signature="login()[pri:0, instance:com.testing.demo.EcommerceOrder@563f38c4]" name="login" is-config="true" duration-ms="7581" started-at="2020-11-21T09:56:37 EST" finished-at="2020-11-21T09:56:45 EST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- login -->
-        <test-method status="PASS" signature="orderPlacement()[pri:0, instance:com.testing.demo.EcommerceOrder@54422e18]" name="orderPlacement" duration-ms="40713" started-at="2020-11-21T09:08:54 EST" finished-at="2020-11-21T09:09:35 EST">
+        <test-method status="PASS" signature="orderPlacement()[pri:0, instance:com.testing.demo.EcommerceOrder@563f38c4]" name="orderPlacement" duration-ms="33862" started-at="2020-11-21T09:56:45 EST" finished-at="2020-11-21T09:57:19 EST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- orderPlacement -->
-        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.testing.demo.EcommerceOrder@54422e18]" name="afterTest" is-config="true" duration-ms="3828" started-at="2020-11-21T09:09:35 EST" finished-at="2020-11-21T09:09:39 EST">
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.testing.demo.EcommerceOrder@563f38c4]" name="afterTest" is-config="true" duration-ms="3330" started-at="2020-11-21T09:57:19 EST" finished-at="2020-11-21T09:57:22 EST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterTest -->

@@ -26,12 +26,15 @@ import org.testng.annotations.AfterTest;
 
 
 public class EcommerceOrder {
-	
+
 	WebDriver driver=new ChromeDriver();
 	Properties prop = new Properties();
-	
+
 	private static final String PROPERTIES_FILE = "config.properties";
 
+	/**
+	 * Load Properties file from resources
+	 */
 	private void loadProperties() {
 		try (InputStream input = EcommerceOrder.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE)) {
 
@@ -55,7 +58,7 @@ public class EcommerceOrder {
 	 */
 	@BeforeTest
 	public void login() {
-		
+
 		loadProperties();
 
 		//Navigate to the URL and maximizing the browser
@@ -71,22 +74,13 @@ public class EcommerceOrder {
 		driver.findElement(By.id("Email")).sendKeys(prop.getProperty("demo.email"));
 		driver.findElement(By.id("Password")).sendKeys(prop.getProperty("demo.passwd"));
 		driver.findElement(By.xpath(prop.getProperty("demo.login.xpath"))).click();
+		System.out.println("Login Successfull!");
 	}
 
-
 	/**
-	 * Selecting a product and Adding to the cart
-	 * @throws IOException 
+	 * Clear Shopping Cart if not empty
 	 */
-
-	@Test
-	public void orderPlacement() throws IOException {
-
-		//Verify the UserID after login
-		String verifyUserId= driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.userid.xpath"))).getText();
-		Assert.assertEquals(verifyUserId, prop.getProperty("demo.email"));
-
-		//Clearing Shopping Cart
+	private void clearShoppingCart() {
 		driver.findElement(By.linkText("Shopping cart")).click();
 		if(driver.getPageSource().contains("Your Shopping Cart is empty!"))
 		{
@@ -102,8 +96,14 @@ public class EcommerceOrder {
 
 			}
 			driver.findElement(By.name("updatecart")).click();
+			System.out.println("Shopping Cart Cleared Successfully!");
 		}
-
+	}
+	
+	/**
+	 * Add Book to Cart
+	 */
+	private void addBookToCart() {
 		//Navigating to Books tab
 		driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.books.xpath"))).click();
 		driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.book.xpath"))).click();
@@ -117,23 +117,14 @@ public class EcommerceOrder {
 		driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.quantity.xpath"))).sendKeys("2");
 
 		driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.addtocart.xpath"))).click();
+		System.out.println("Books Added to Cart Successfully!");
+	}
 
-		//Validating the bar notification when the product is added
-		int loopCount = 10;
-		while(loopCount-- >0) {
-			if( driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.barnotification.xpath"))).isDisplayed()) {
-				boolean isProductAdded= driver.getPageSource().contains("The product has been added to your ");
-				Assert.assertEquals(isProductAdded,true);
-				System.out.println("Bar Notification Validated");
-				break;
-			}
-		}
-
-		// Selecting Checkout
-		driver.findElement(By.linkText("Shopping cart")).click();
-		driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.termsofservice.xpath"))).click();
-		driver.findElement(By.name("checkout")).click();
-
+	/**
+	 * Fill Billing Address Details
+	 * @throws IOException
+	 */
+	private void fillAddressDetails() throws IOException {
 		//Selecting New Address
 		Select address = new Select(driver.findElement(By.id("billing-address-select")));
 		address.selectByVisibleText("New Address");
@@ -151,8 +142,14 @@ public class EcommerceOrder {
 
 		driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.billingaddress_continue.xpath"))).click();
 
+		System.out.println("Billing Details Filled Successfully!");
 		threadWait();
+	}
 
+	/**
+	 * Update Shipping Details and select mode of Shipping
+	 */
+	private void selectShippingDetailsAndMethod() {
 		//Select the Shipping address 
 		Select shipping_Address = new Select(driver.findElement(By.id("shipping-address-select")));
 		shipping_Address.selectByVisibleText("atest dummy, Dilshuknagar, Hyderabad Z500000, India");
@@ -165,7 +162,14 @@ public class EcommerceOrder {
 		driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.shippingmethod.xpath"))).click();
 		driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.shippingmethod_continue.xpath"))).click();
 
+		System.out.println("Shipping Details and Method Added Successfully!");
 		threadWait();
+	}
+
+	/**
+	 * Selecting and Validating Payment Method
+	 */
+	private void selectAndValidatePaymentMethod() {
 
 		//Select Payment Method
 		driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.paymentmethod.xpath"))).click();
@@ -178,14 +182,62 @@ public class EcommerceOrder {
 		Assert.assertEquals(paymentMessage, true);
 		driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.cod_continue.xpath"))).click();
 
+		System.out.println("Select and Validated Payment Method Successfully!");
+		
 		threadWait();
+	}
+	
+	/**
+	 * Selecting a product and Adding to the cart
+	 * @throws IOException 
+	 */
+	@Test
+	public void orderPlacement() throws IOException {
 
+		//Verify the UserID after login
+		String verifyUserId= driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.userid.xpath"))).getText();
+		Assert.assertEquals(verifyUserId, prop.getProperty("demo.email"));
+
+		//Clearing Shopping Cart	
+		clearShoppingCart();
+
+		//Adding Book to Cart
+		addBookToCart();
+
+		//Validating the bar notification when the product is added
+		int loopCount = 10;
+		while(loopCount-- >0) {
+			if( driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.barnotification.xpath"))).isDisplayed()) {
+				boolean isProductAdded= driver.getPageSource().contains("The product has been added to your ");
+				Assert.assertEquals(isProductAdded,true);
+				System.out.println("Bar Notification Validated");
+				break;
+			}
+		}
+
+		// Selecting Checkout
+		driver.findElement(By.linkText("Shopping cart")).click();
+		driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.termsofservice.xpath"))).click();
+		driver.findElement(By.name("checkout")).click();
+
+
+		// Add Address details
+		fillAddressDetails();
+		
+		// Shipping Details and Mode of shipping 
+		selectShippingDetailsAndMethod();
+		
+		// Selecting and Validating Payment Method
+		selectAndValidatePaymentMethod();
+		
 		//Confirm the order
 		driver.findElement(By.xpath(prop.getProperty("demo.orderplacement.confirm.xpath"))).click();
+		System.out.println("Order Placed Successfully!");
+		
 		threadWait();
 
 	}
-	
+
 	/**
 	 * Thread Wait for each action on Website
 	 * @throws IOException 
@@ -204,7 +256,7 @@ public class EcommerceOrder {
 	 * This method reads Excel File with Billing Address details
 	 * @throws URISyntaxException 
 	 */
-	
+
 	private File getFileFromResource(String fileName) throws URISyntaxException{
 
 		ClassLoader classLoader = getClass().getClassLoader();
