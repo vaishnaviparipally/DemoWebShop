@@ -2,24 +2,24 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="19878" started-at="2020-11-21T01:40:18 EST" finished-at="2020-11-21T01:40:38 EST">
+  <suite name="Default suite" duration-ms="68312" started-at="2020-11-21T05:12:23 EST" finished-at="2020-11-21T05:13:32 EST">
     <groups>
     </groups>
-    <test name="Test" duration-ms="19878" started-at="2020-11-21T01:40:18 EST" finished-at="2020-11-21T01:40:38 EST">
+    <test name="Default test" duration-ms="68312" started-at="2020-11-21T05:12:23 EST" finished-at="2020-11-21T05:13:32 EST">
       <class name="com.testing.demo.EcommerceOrder">
-        <test-method status="PASS" signature="login()[pri:0, instance:com.testing.demo.EcommerceOrder@5e853265]" name="login" is-config="true" duration-ms="19856" started-at="2020-11-21T01:40:18 EST" finished-at="2020-11-21T01:40:38 EST">
+        <test-method status="PASS" signature="login()[pri:0, instance:com.testing.demo.EcommerceOrder@5ab956d7]" name="login" is-config="true" duration-ms="57452" started-at="2020-11-21T05:12:23 EST" finished-at="2020-11-21T05:13:21 EST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- login -->
-        <test-method status="PASS" signature="placingOrder()[pri:0, instance:com.testing.demo.EcommerceOrder@5e853265]" name="placingOrder" duration-ms="3" started-at="2020-11-21T01:40:38 EST" finished-at="2020-11-21T01:40:38 EST">
+        <test-method status="PASS" signature="orderPlacement()[pri:0, instance:com.testing.demo.EcommerceOrder@5ab956d7]" name="orderPlacement" duration-ms="10829" started-at="2020-11-21T05:13:21 EST" finished-at="2020-11-21T05:13:32 EST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- placingOrder -->
-        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.testing.demo.EcommerceOrder@5e853265]" name="afterTest" is-config="true" duration-ms="0" started-at="2020-11-21T01:40:38 EST" finished-at="2020-11-21T01:40:38 EST">
+        </test-method> <!-- orderPlacement -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.testing.demo.EcommerceOrder@5ab956d7]" name="afterTest" is-config="true" duration-ms="0" started-at="2020-11-21T05:13:32 EST" finished-at="2020-11-21T05:13:32 EST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterTest -->
       </class> <!-- com.testing.demo.EcommerceOrder -->
-    </test> <!-- Test -->
-  </suite> <!-- Suite -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>
